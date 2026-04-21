@@ -11,16 +11,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Buscaminas',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const MinesweeperScreen(), // Apuntamos a nuestra nueva pantalla
+      home: const MinesweeperScreen(),
     );
   }
 }
 //shift+alt+f
 //ordenar todo
-
-
  
- //ordenar el código, el override está fuera de una clase, revisar despues
 class MinesweeperScreen extends StatelessWidget {
   const MinesweeperScreen({Key? key}) : super(key: key);
   @override
@@ -82,7 +79,6 @@ class MinesweeperScreen extends StatelessWidget {
 class MineCell extends StatelessWidget {
 
   final int index;
-
   const  MineCell({ 
     Key? key, 
     required  this .index,  // Parámetro obligatorio  en el constructor 
