@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+
+//logger
+var logger = Logger();
 
 void main() {
+  logger.d('Iniciando app buscaminas');
+  logger.i('Iniciando app buscaminas');
+  logger.w('Iniciando app buscaminas');
+  logger.e('Iniciando app buscaminas');
+
   runApp(const MyApp());
 }
 
