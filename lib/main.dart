@@ -6,10 +6,10 @@ import 'package:probando_flutter_lab1/ui/screens/minesweeper_screen.dart';
 var logger = Logger();
 
 void main() {
-  logger.d('Iniciando app buscaminas'); //debug
+  //logger.d('Iniciando app buscaminas'); //debug
   logger.i('Iniciando app buscaminas'); //info
-  logger.w('Iniciando app buscaminas'); //warning
-  logger.e('Iniciando app buscaminas'); //error
+  //logger.w('Iniciando app buscaminas'); //warning
+  //logger.e('Iniciando app buscaminas'); //error
 
   runApp(const MyApp());
 }
@@ -20,7 +20,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Buscaminas',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          primary: Colors.blue,
+          secondary: Colors.yellow,
+        ),
+        //color fondo default
+        scaffoldBackgroundColor: const Color.fromARGB(255, 242, 128, 27),
+        
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500),
+        ),
+        useMaterial3: true,
+      ),
       home: const MinesweeperScreen(),
     );
   }
