@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
+      debugShowCheckedModeBanner: false, //quitar el debug de la esquina
       home: const MinesweeperScreen(),
     );
   }

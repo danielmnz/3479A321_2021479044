@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:probando_flutter_lab1/ui/widgets/minecell.dart';
+import 'package:probando_flutter_lab1/ui/screens/about.dart';
 
 class MinesweeperScreen extends StatelessWidget {
   const MinesweeperScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Buscaminas')),
+      appBar: AppBar(
+        title: const Text('Buscaminas'),
+        //dentro de propieades de appbar, usar actions
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person_outline),
+            onPressed: () {
+              //navegar a la otra pantalla
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const AboutScreen()),
+              );
+            },
+          ),
+        ],
+      ),
+
       body: SafeArea(
         child: Column(
           children: [
@@ -17,10 +34,10 @@ class MinesweeperScreen extends StatelessWidget {
               child: const Center(
                 child: Text(
                   "STATUS: 349 segundos | Minas : 10 | Cuadros: 56",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
+            ),
             const Divider(height: 1),
             //area de juego
             Expanded(
@@ -55,6 +72,4 @@ class MinesweeperScreen extends StatelessWidget {
       ),
     );
   }
-
-  
 }
