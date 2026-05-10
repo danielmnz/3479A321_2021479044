@@ -1,11 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
+import 'package:probando_flutter_lab1/models/cell_model.dart';
 import 'package:probando_flutter_lab1/ui/screens/history_screen.dart';
 import 'package:probando_flutter_lab1/ui/screens/menu_screen.dart';
 import 'package:probando_flutter_lab1/ui/widgets/minecell.dart';
 import 'package:probando_flutter_lab1/ui/screens/about.dart';
 
-class MinesweeperScreen extends StatelessWidget {
+class MinesweeperScreen extends StatefulWidget {
   const MinesweeperScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MinesweeperScreen> createState() => _MinesweeperScreenState();
+}
+
+class _MinesweeperScreenState extends State<MinesweeperScreen> {
+  late List<CellModel> _cells;
+  final logger = Logger();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _cells = List.generate(
+      64,
+      (i) => CellModel(index: i)
+    );
+    
+    logger.i('Lifecycle: initState() - El estado ha sido creado.');
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    logger.i('Lifecycle: didChangeDependencies() - Contexto listo o dependencias cambiadas');
+  }
+
+  @override
+  void didUpdateWidget(covariant MinesweeperScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    logger.w('Lifecycle: didUpdateWidget() - La configuración del widget ha cambiado.'); 
+  }
+
+  @override
+  void dispose() {
+     logger.e('Lifecycle: dispose() - El estado se destruye. Liberando memoria.');
+     super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
