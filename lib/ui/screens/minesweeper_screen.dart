@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:probando_flutter_lab1/ui/screens/history_screen.dart';
+import 'package:probando_flutter_lab1/ui/screens/menu_screen.dart';
 import 'package:probando_flutter_lab1/ui/widgets/minecell.dart';
 import 'package:probando_flutter_lab1/ui/screens/about.dart';
 
@@ -15,10 +17,7 @@ class MinesweeperScreen extends StatelessWidget {
             icon: const Icon(Icons.person_outline),
             onPressed: () {
               //navegar a la otra pantalla
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const AboutScreen()),
-              );
+              Navigator.pushNamed(context, '/about');
             },
           ),
         ],

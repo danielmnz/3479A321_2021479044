@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:probando_flutter_lab1/ui/screens/about.dart';
+import 'package:probando_flutter_lab1/ui/screens/history_screen.dart';
+import 'package:probando_flutter_lab1/ui/screens/menu_screen.dart';
 import 'package:probando_flutter_lab1/ui/screens/minesweeper_screen.dart';
 
 //logger
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
           primary: Colors.blue,
-          secondary: Colors.yellow,
+          secondary: Colors.red,
         ),
         //color fondo default
         scaffoldBackgroundColor: const Color.fromARGB(255, 242, 128, 27),
@@ -35,7 +38,15 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false, //quitar el debug de la esquina
-      home: const MinesweeperScreen(),
+      //home: const MinesweeperScreen(),
+      initialRoute: '/menu',
+
+      routes: {
+        '/menu': (context) => const MenuScreen(),
+        '/game': (context) => const MinesweeperScreen(),
+        '/history': (context) => const HistoryScreen(),
+        '/about': (context) => const AboutScreen(),
+      },
     );
   }
 }
