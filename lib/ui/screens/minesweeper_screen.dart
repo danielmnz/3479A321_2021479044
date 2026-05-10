@@ -8,6 +8,10 @@ class MinesweeperScreen extends StatelessWidget {
   const MinesweeperScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final String difficulty = args?['difficulty'] ?? 'Desconocida';
+    final int gridSize = args?['gridSize'] ?? 8;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Buscaminas'),
@@ -30,9 +34,9 @@ class MinesweeperScreen extends StatelessWidget {
             Container(
               height: 60,
               color: Colors.grey[300],
-              child: const Center(
+              child: Center(
                 child: Text(
-                  "STATUS: 349 segundos | Minas : 10 | Cuadros: 56",
+                  "Dificultad: $difficulty | Grid: ${gridSize}x$gridSize",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),

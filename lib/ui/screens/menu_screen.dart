@@ -6,7 +6,7 @@ class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Menú")),
+      appBar: AppBar(title: const Text("Menú")),
       body: Center(
         child: Column(
           children: [
@@ -18,7 +18,11 @@ class MenuScreen extends StatelessWidget {
             SizedBox(height: 9),
 
             ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/game'),
+              onPressed: () => Navigator.pushNamed(
+                context,
+                '/game',
+                arguments: {'difficulty' : 'Facil', 'gridSize': 8},
+              ),
               child: const Text('IR AL JUEGO'),
             ),
           ],
