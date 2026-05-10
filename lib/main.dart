@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:probando_flutter_lab1/models/game_view.dart';
 import 'package:probando_flutter_lab1/ui/screens/about.dart';
 import 'package:probando_flutter_lab1/ui/screens/history_screen.dart';
 import 'package:probando_flutter_lab1/ui/screens/menu_screen.dart';
 import 'package:probando_flutter_lab1/ui/screens/minesweeper_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:probando_flutter_lab1/models/game_view.dart';
 
 //logger
 var logger = Logger();
@@ -43,7 +46,12 @@ class MyApp extends StatelessWidget {
 
       routes: {
         '/menu': (context) => const MenuScreen(),
-        '/game': (context) => const MinesweeperScreen(),
+
+        '/game': (context) => ChangeNotifierProvider(
+          create: (context) => GameViewModel(),
+          child: const MinesweeperScreen(),
+        ),
+
         '/history': (context) => HistoryScreen(),
         '/about': (context) => const AboutScreen(),
       },

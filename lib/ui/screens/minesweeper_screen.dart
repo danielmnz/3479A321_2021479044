@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
-import 'package:probando_flutter_lab1/models/cell_model.dart';
+//import 'package:logger/logger.dart';
+//import 'package:probando_flutter_lab1/models/cell_model.dart';
 import 'package:probando_flutter_lab1/ui/screens/history_screen.dart';
 import 'package:probando_flutter_lab1/ui/screens/menu_screen.dart';
 import 'package:probando_flutter_lab1/ui/widgets/minecell.dart';
 import 'package:probando_flutter_lab1/ui/screens/about.dart';
+import 'package:probando_flutter_lab1/models/game_view.dart';
+import 'package:provider/provider.dart';
 
 class MinesweeperScreen extends StatefulWidget {
   const MinesweeperScreen({Key? key}) : super(key: key);
@@ -14,17 +16,19 @@ class MinesweeperScreen extends StatefulWidget {
 }
 
 class _MinesweeperScreenState extends State<MinesweeperScreen> {
-  late List<CellModel> _cells;
-  final logger = Logger();
+  //late List<CellModel> _cells;
+  //final logger = Logger();
 
+  /*
   @override
   void initState() {
     super.initState();
 
+    /*
     _cells = List.generate(
       64,
       (i) => CellModel(index: i)
-    );
+    );*/
     
     logger.i('Lifecycle: initState() - El estado ha sido creado.');
   }
@@ -47,12 +51,15 @@ class _MinesweeperScreenState extends State<MinesweeperScreen> {
      super.dispose();
   }
 
+  /*
+  //ya no se usa
   void _onCellTapped(int index) {
     setState(() {
 
       _cells[index].isRevealed = true;
     });
-  }
+  }*/
+  */
 
 
   @override
@@ -60,6 +67,8 @@ class _MinesweeperScreenState extends State<MinesweeperScreen> {
     final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     final String difficulty = args?['difficulty'] ?? 'Desconocida';
     final int gridSize = args?['gridSize'] ?? 8;
+
+    final viewModel = context.watch<GameViewModel>();
     
     return Scaffold(
       appBar: AppBar(
@@ -94,7 +103,7 @@ class _MinesweeperScreenState extends State<MinesweeperScreen> {
             //area de juego
             Expanded(
               //child: Text("Tablero de Juego", style: TextStyle(fontSize: 24, color: Colors.grey)),
-              child: _gameBoard(),
+              child: _gameBoard(viewModel),
             ),
           ],
         ),
@@ -102,7 +111,7 @@ class _MinesweeperScreenState extends State<MinesweeperScreen> {
     );
   }
 
-  Widget _gameBoard() {
+  Widget _gameBoard(GameViewModel viewModel) {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -118,8 +127,8 @@ class _MinesweeperScreenState extends State<MinesweeperScreen> {
             itemCount: 64, //8x8 = 64 celdas
             itemBuilder: (context, index) {
               return MineCell(
-                cell: _cells[index],
-                onTap: () => _onCellTapped(index),
+                cell: viewModel.cells[index],
+                onTap: () => viewModel.revealCell(index),
               ); //clase widget del container
             },
           ),
