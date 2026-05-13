@@ -21,14 +21,33 @@ class MineCell extends StatelessWidget {
           color: Colors.grey[400],
           border: Border.all(color: Colors.grey[600]!, width: 1.5),
         ),
-      
+
         child: Center(
-          child: cell.isRevealed ? Icon(
-            Icons.flag,
-            size: 30,
-            color: theme.colorScheme.primary, //llamamos al scheme
-          ) : const SizedBox.shrink(),
+          child: _buildCellContent(),
         ),
+      ),
+    );
+  }
+
+  Widget _buildCellContent() {
+    if (!cell.isRevealed) {
+      return const SizedBox.shrink();
+    }
+
+    if (cell.isBomb) {
+      return Image.asset(
+        'assets/icons/bomba.png',
+        width: 40,
+        height: 40,
+        fit: BoxFit.contain,
+      );
+    }
+
+    return Text(
+      '${cell.index}',
+      style: const TextStyle(
+        fontWeight: FontWeight.bold,
+        color: Colors.blueGrey,
       ),
     );
   }

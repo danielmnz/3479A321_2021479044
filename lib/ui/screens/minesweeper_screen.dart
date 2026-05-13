@@ -16,52 +16,6 @@ class MinesweeperScreen extends StatefulWidget {
 }
 
 class _MinesweeperScreenState extends State<MinesweeperScreen> {
-  //late List<CellModel> _cells;
-  //final logger = Logger();
-
-  /*
-  @override
-  void initState() {
-    super.initState();
-
-    /*
-    _cells = List.generate(
-      64,
-      (i) => CellModel(index: i)
-    );*/
-    
-    logger.i('Lifecycle: initState() - El estado ha sido creado.');
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    logger.i('Lifecycle: didChangeDependencies() - Contexto listo o dependencias cambiadas');
-  }
-
-  @override
-  void didUpdateWidget(covariant MinesweeperScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    logger.w('Lifecycle: didUpdateWidget() - La configuración del widget ha cambiado.'); 
-  }
-
-  @override
-  void dispose() {
-     logger.e('Lifecycle: dispose() - El estado se destruye. Liberando memoria.');
-     super.dispose();
-  }
-
-  /*
-  //ya no se usa
-  void _onCellTapped(int index) {
-    setState(() {
-
-      _cells[index].isRevealed = true;
-    });
-  }*/
-  */
-
-
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
