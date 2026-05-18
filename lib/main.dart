@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:probando_flutter_lab1/core/services/storage_service.dart'; //lab6
 import 'package:probando_flutter_lab1/models/game_view.dart';
 import 'package:probando_flutter_lab1/ui/screens/about.dart';
 import 'package:probando_flutter_lab1/ui/screens/history_screen.dart';
@@ -11,11 +12,15 @@ import 'package:probando_flutter_lab1/models/game_view.dart';
 //logger
 var logger = Logger();
 
-void main() {
+void main() async { //async
   //logger.d('Iniciando app buscaminas'); //debug
   logger.i('Iniciando app buscaminas'); //info
   //logger.w('Iniciando app buscaminas'); //warning
   //logger.e('Iniciando app buscaminas'); //error
+
+  //lab6
+  WidgetsFlutterBinding.ensureInitialized();
+  await StorageService.init();
 
   runApp(const MyApp());
 }
