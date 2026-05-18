@@ -63,7 +63,9 @@ class MyApp extends StatelessWidget {
         '/menu': (context) => const MenuScreen(),
 
         '/game': (context) => ChangeNotifierProvider(
-          create: (context) => GameViewModel(),
+          create: (context) => GameViewModel(
+            gridSize: context.read<SettingsViewModel>().gridSize, //numero de grillas indicado en el settings
+          ),
           child: const MinesweeperScreen(),
         ),
 

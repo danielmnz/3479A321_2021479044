@@ -21,7 +21,7 @@ class MenuScreen extends StatelessWidget {
 
             //
             Text(
-              "Pantalla de menú, Bienvenido ${settings.username}! / Dificultad actual: ${settings.difficulty}",
+              "Pantalla de menú, Bienvenido ${settings.username}! \n Dificultad actual: ${settings.difficulty}",
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,

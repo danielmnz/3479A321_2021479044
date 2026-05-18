@@ -43,12 +43,19 @@ class MineCell extends StatelessWidget {
       );
     }
 
+    //en caso de que no haya minas en la celda, que no muestre un 0
+    if (cell.adjacentMines == 0) {
+      return const SizedBox.shrink();
+    }
+
     return Text(
-      '${cell.index}',
+      '${cell.adjacentMines}',
       style: const TextStyle(
         fontWeight: FontWeight.bold,
         color: Colors.blueGrey,
+        fontSize: 16,
       ),
     );
+    //añadir boton inferior derecha, reiniciar juego
   }
 }
