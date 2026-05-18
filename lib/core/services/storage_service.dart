@@ -14,8 +14,4 @@ class StorageService {
 
   static Future<void> saveDifficulty(String difficulty) async => await _prefs.setString('difficulty', difficulty);
   static String getDifficulty() => _prefs.getString('difficulty') ?? 'Fácil';
-
-  
-
-
 }

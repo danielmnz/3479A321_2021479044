@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:probando_flutter_lab1/core/services/storage_service.dart'; //lab6
 import 'package:probando_flutter_lab1/models/game_view.dart';
+import 'package:probando_flutter_lab1/models/settings_model.dart';
 import 'package:probando_flutter_lab1/ui/screens/about.dart';
 import 'package:probando_flutter_lab1/ui/screens/history_screen.dart';
 import 'package:probando_flutter_lab1/ui/screens/menu_screen.dart';
 import 'package:probando_flutter_lab1/ui/screens/minesweeper_screen.dart';
+import 'package:probando_flutter_lab1/ui/screens/settings_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:probando_flutter_lab1/models/game_view.dart';
 
@@ -22,7 +24,15 @@ void main() async { //async
   WidgetsFlutterBinding.ensureInitialized();
   await StorageService.init();
 
-  runApp(const MyApp());
+  runApp(
+    //lab6
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => SettingsViewModel())
+      ],
+      child: const MyApp()
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -59,6 +69,7 @@ class MyApp extends StatelessWidget {
 
         '/history': (context) => HistoryScreen(),
         '/about': (context) => const AboutScreen(),
+        '/settings': (context) => const SettingsScreen(),
       },
     );
   }

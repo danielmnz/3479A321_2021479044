@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:probando_flutter_lab1/core/services/storage_service.dart';
+import 'package:probando_flutter_lab1/models/settings_model.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -22,6 +24,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _saveSettings() async {
     await StorageService.saveUsername(_nameController.text);
     await StorageService.saveDifficulty(_selectedDifficulty);
+
+    //llamamos a la función que "refresca" la configuración
+    context.read<SettingsViewModel>().refreshSettings();
 
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(

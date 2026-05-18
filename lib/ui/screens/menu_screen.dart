@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:probando_flutter_lab1/core/services/storage_service.dart';
+import 'package:probando_flutter_lab1/models/settings_model.dart';
+import 'package:provider/provider.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var username = StorageService.getUsername(); //me sirve para el proyecto
+    //var username = StorageService.getUsername(); //me sirve para el proyecto
+
+    final settings = context.watch<SettingsViewModel>();
+    final difficulty = context.watch<SettingsViewModel>();
 
     return Scaffold(
       appBar: AppBar(title: const Text("Menú")),
@@ -14,13 +19,22 @@ class MenuScreen extends StatelessWidget {
         child: Column(
           children: [
 
+            //
             Text(
-              "Pantalla de menú, Bienvenido! $username",
+              "Pantalla de menú, Bienvenido ${settings.username}! / Dificultad actual: ${settings.difficulty}",
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
+
+            ElevatedButton(
+              onPressed: () async {
+                Navigator.pushNamed(context, "/settings");
+              },
+              child: const Text("Ir a Ajustes"),
+            ),
+            //
 
             SizedBox(height: 19),
 
