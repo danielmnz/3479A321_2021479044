@@ -28,7 +28,16 @@ class HistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Historial")),
+      appBar: AppBar(
+        title: const Text(
+          "Historial",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.deepPurple,
+        toolbarHeight: 80,
+      ),
       body: ListView.builder(
         itemBuilder: (context, index) {
           final game = listMaqueta[index];

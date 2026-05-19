@@ -14,12 +14,30 @@ class MenuScreen extends StatelessWidget {
     final difficulty = context.watch<SettingsViewModel>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Menú")),
+      appBar: AppBar(
+        title: const Text(
+          "Buscaminas / Menú",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.deepPurple,
+        toolbarHeight: 80,
+      ),
       body: Center(
         child: Column(
           children: [
 
-            //
+            const SizedBox(height: 16),
+            
+            const Icon(
+              Icons.grid_on,
+              size: 80,
+              color: Colors.deepPurple,
+            ),
+
+            const SizedBox(height: 16),
+
             Text(
               "Pantalla de menú, Bienvenido ${settings.username}! \n Dificultad actual: ${settings.difficulty}",
               style: const TextStyle(
@@ -27,31 +45,97 @@ class MenuScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
-            ElevatedButton(
-              onPressed: () async {
-                Navigator.pushNamed(context, "/settings");
-              },
-              child: const Text("Ir a Ajustes"),
-            ),
             //
 
-            SizedBox(height: 19),
+            const SizedBox(height: 16),
 
-            ElevatedButton(
-              onPressed: () => Navigator.pushNamed(context, '/history'),
-              child: const Text('Test -> Ir a Historial'),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Card(
+                elevation: 4,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Configuración Actual",
+                        style: TextStyle(
+                          color: Colors.grey,
+                        ),
+                      ),
+              
+                      const Divider(),
+              
+                      ListTile(
+                        leading: const Icon(
+                          Icons.dashboard,
+                          color: Colors.deepPurple,
+                        ),
+                        title: Text(
+                          "Dificultad: ${settings.difficulty}",
+                        ),
+                        subtitle: Text(
+                          "Tablero de ${settings.gridSize}x${settings.gridSize}",
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () => Navigator.pushNamed(context, "/settings"),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
 
-            SizedBox(height: 9),
+            const SizedBox(height: 40),
 
-            ElevatedButton(
-              onPressed: () => Navigator.pushNamed(
-                context,
-                '/game',
-                arguments: {'difficulty' : 'Facil', 'gridSize': 8},
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton.icon(
+                  icon: const Icon(
+                    Icons.play_arrow,
+                    size: 28,
+                  ),
+                  label: const Text(
+                    "NUEVA PARTIDA",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  onPressed: () => Navigator.pushNamed(context, "/game"),
+                ),
               ),
-              child: const Text('IR AL JUEGO'),
+            ),
+
+            const SizedBox(height: 16),
+
+            TextButton.icon(
+              icon: const Icon(
+                Icons.history,
+                color: Colors.black,
+              ),
+              label: const Text(
+                "Ver Historial de Partidas",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                ),
+              ),
+              onPressed: () => Navigator.pushNamed(context, "/history"),
             ),
           ],
         ),

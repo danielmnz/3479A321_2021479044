@@ -26,17 +26,27 @@ class _MinesweeperScreenState extends State<MinesweeperScreen> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Buscaminas'),
+        title: const Text(
+          'Buscaminas',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         //dentro de propieades de appbar, usar actions
         actions: [
           IconButton(
-            icon: const Icon(Icons.person_outline),
+            icon: const Icon(
+              Icons.person_outline,
+              color: Colors.white,
+            ),
             onPressed: () {
               //navegar a la otra pantalla
               Navigator.pushNamed(context, '/about');
             },
           ),
         ],
+        backgroundColor: Colors.deepPurple,
+        toolbarHeight: 80,
       ),
 
       body: SafeArea(

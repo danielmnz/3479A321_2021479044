@@ -48,11 +48,39 @@ class MineCell extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    Color numberColor;
+
+    switch (cell.adjacentMines) {
+      case 1:
+        numberColor = Colors.blue;
+      break;
+
+      case 2:
+        numberColor = Colors.green;
+      break;
+
+      case 3:
+        numberColor = Colors.red;
+      break;
+
+      case 4:
+        numberColor = Colors.purple;
+      break;
+
+      case 5:
+        numberColor = Colors.brown;
+      break;
+
+      default:
+        numberColor = Colors.black;
+      break;
+    }
+
     return Text(
       '${cell.adjacentMines}',
-      style: const TextStyle(
+      style: TextStyle(
         fontWeight: FontWeight.bold,
-        color: Colors.blueGrey,
+        color: numberColor, //así, cambia el color del texto de cada celda
         fontSize: 16,
       ),
     );
