@@ -41,7 +41,7 @@ class GameViewModel extends ChangeNotifier {
     Random random = Random();
     int bombsPlanted = 0;
     while (bombsPlanted < 10) {
-      int index = random.nextInt(64);
+      int index = random.nextInt(totalCells);
       if (!_cells[index].isBomb) {
         _cells[index].isBomb = true;
         bombsPlanted++;
@@ -90,10 +90,17 @@ class GameViewModel extends ChangeNotifier {
 
     _cells[index].isRevealed = true;
 
+    //timer
+    if (_isFirstTrap) {
+      _startTimer();
+      _isFirstTrap = false;
+    }
+
     // Si toca una bomba, el juego termina
     if (_cells[index].isBomb) {
       _isGameOver = true;
-      _revealAll(); // Función para mostrar todo al mori.
+      _timer?.cancel();//cancelar el timer cuando gameover
+      _revealAll(); // Función para mostrar todo al morir.
     }
     notifyListeners();
   }

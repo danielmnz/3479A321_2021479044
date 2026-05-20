@@ -58,7 +58,7 @@ class _MinesweeperScreenState extends State<MinesweeperScreen> {
               color: Colors.grey[300],
               child: Center(
                 child: Text(
-                  "Dificultad: $difficulty | Grid: ${gridSize}x$gridSize",
+                  "Dificultad: $difficulty | Grid: ${gridSize}x$gridSize \n Tiempo de juego: ${viewModel.secondsElapsed}",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
