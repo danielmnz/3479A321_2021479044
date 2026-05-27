@@ -1,4 +1,4 @@
-package com.example.probando_flutter_lab1
+package cl.munoz.minesweeper
 
 import io.flutter.embedding.android.FlutterActivity
 
