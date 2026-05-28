@@ -3,6 +3,7 @@ import 'package:probando_flutter_lab1/models/cell_model.dart';
 import 'dart:math'; //para el random
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart'; //audio
+import 'package:sensors_plus/sensors_plus.dart'; //sensor
 
 class GameViewModel extends ChangeNotifier {
   //para crear las celdas dentro de generateboard
@@ -20,6 +21,9 @@ class GameViewModel extends ChangeNotifier {
   //audio
   final AudioPlayer _sfxPlayer = AudioPlayer();
 
+  //sensores
+  StreamSubscription? _accelerometerSuscription;
+
   final int gridSize;
   late int totalCells;
 
@@ -27,6 +31,8 @@ class GameViewModel extends ChangeNotifier {
   GameViewModel({required this.gridSize}) {
     totalCells = gridSize * gridSize; //ej 10x10 = 100 celdas
     _generateBoard(); //generar tablero
+
+    _initAccelerometer();
   }
 
   //revealAll
@@ -89,6 +95,26 @@ class GameViewModel extends ChangeNotifier {
     });
   }
 
+  void _resetGame() {
+    _timer?.cancel();
+    secondsElapsed = 0;
+    _isFirstTrap = true;
+    _isGameOver = false;
+    _generateBoard();
+    notifyListeners();
+  }
+
+  void _initAccelerometer() {
+    _accelerometerSuscription = accelerometerEventStream().listen((AccelerometerEvent event) {
+      print(event.x.abs());
+
+      //agitar fuerte para reiniciar
+      if (_isGameOver && event.x.abs() > 15.0) {
+        _resetGame();
+      }
+    });
+  }
+
   //audio
   void _playSound(String fileName) async {
     await _sfxPlayer.release();
@@ -124,6 +150,8 @@ class GameViewModel extends ChangeNotifier {
     _timer?.cancel(); //cancelar timer al gameover
 
     _sfxPlayer.dispose();
+    
+    _accelerometerSuscription?.cancel();
 
     super.dispose();
   }
