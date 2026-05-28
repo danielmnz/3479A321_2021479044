@@ -1,17 +1,25 @@
-# probando_flutter_lab1
+# Buscaminas Flutter (Laboratorios)
 
-A new Flutter project.
+## Funcionalidades Implementadas
+- Tablero dinámico de Buscaminas
+- Configuración
+- Temporizador de partida
+- Persistencia de datos
+- Historial de las partidas
+- Reproducción de efectos de sonido
+- Integración de acelerómetro para reiniciar el juego.
+- Compartir datos de resultados mediante aplicaciones del sistema.
+- Cambio de package_name e icono personalizado.
 
-## Getting Started
+## Tecnologías Utilizadas
+- Provider
+- SharedPreferences
+- Audioplayers
+- Sensors Plus
+- Share Plus
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Posibles Trabajos Futuros
+- Implementar ranking de resultados local
+- Agregar un modo oscuro
+- Incorporar más dificultades posibles
+- Mejorar efectos visuales
