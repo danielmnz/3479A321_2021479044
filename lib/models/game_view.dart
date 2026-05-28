@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:probando_flutter_lab1/models/cell_model.dart';
 import 'dart:math'; //para el random
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart'; //audio
 
 class GameViewModel extends ChangeNotifier {
   //para crear las celdas dentro de generateboard
@@ -15,6 +16,9 @@ class GameViewModel extends ChangeNotifier {
   Timer? _timer;
   int secondsElapsed = 0;
   bool _isFirstTrap = true;
+
+  //audio
+  final AudioPlayer _sfxPlayer = AudioPlayer();
 
   final int gridSize;
   late int totalCells;
@@ -85,6 +89,12 @@ class GameViewModel extends ChangeNotifier {
     });
   }
 
+  //audio
+  void _playSound(String fileName) async {
+    await _sfxPlayer.release();
+    await _sfxPlayer.play(AssetSource("audio/$fileName"));
+  }
+
   void revealCell(int index) {
     if (_isGameOver || _cells[index].isRevealed) return;
 
@@ -98,16 +108,22 @@ class GameViewModel extends ChangeNotifier {
 
     // Si toca una bomba, el juego termina
     if (_cells[index].isBomb) {
+      //audio bomba
+      _playSound("explosion.mp3");      
+
       _isGameOver = true;
-      _timer?.cancel();//cancelar el timer cuando gameover
       _revealAll(); // Función para mostrar todo al morir.
+    }else{
+      _playSound("onTap.mp3");
     }
     notifyListeners();
   }
 
   @override
   void dispose() {
-    _timer?.cancel();
+    _timer?.cancel(); //cancelar timer al gameover
+
+    _sfxPlayer.dispose();
 
     super.dispose();
   }
