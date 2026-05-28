@@ -7,6 +7,7 @@ import 'package:probando_flutter_lab1/ui/widgets/minecell.dart';
 import 'package:probando_flutter_lab1/ui/screens/about.dart';
 import 'package:probando_flutter_lab1/models/game_view.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class MinesweeperScreen extends StatefulWidget {
   const MinesweeperScreen({Key? key}) : super(key: key);
@@ -18,29 +19,36 @@ class MinesweeperScreen extends StatefulWidget {
 class _MinesweeperScreenState extends State<MinesweeperScreen> {
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     final String difficulty = args?['difficulty'] ?? 'Desconocida';
     final int gridSize = args?['gridSize'] ?? 8;
 
     final viewModel = context.watch<GameViewModel>();
-    
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Buscaminas',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
+        title: const Text('Buscaminas', style: TextStyle(color: Colors.white)),
         //dentro de propieades de appbar, usar actions
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.person_outline,
-              color: Colors.white,
+          if (viewModel.isGameOver)
+            IconButton(
+              icon: const Icon(Icons.share, color: Colors.white),
+              onPressed: () {
+                final String mensaje =
+                    '¡Acabo de jugar Buscaminas Pro!\n'
+                    'Dificultad: $difficulty\n'
+                    'Tiempo de juego: '
+                    '${viewModel.secondsElapsed} segundos.\n'
+                    '¡Intenta superarme!';
+
+                SharePlus.instance.share(ShareParams(text: mensaje));
+              },
             ),
+
+          IconButton(
+            icon: const Icon(Icons.person_outline, color: Colors.white),
             onPressed: () {
-              //navegar a la otra pantalla
               Navigator.pushNamed(context, '/about');
             },
           ),
